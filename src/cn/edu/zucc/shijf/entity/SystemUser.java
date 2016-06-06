@@ -25,8 +25,8 @@ public class SystemUser {
     }
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "assigned")
+    @GeneratedValue(generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     public String getUserId() {
         return userId;
     }

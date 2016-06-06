@@ -2,13 +2,17 @@ package cn.edu.zucc.shijf.service;
 
 import cn.edu.zucc.shijf.dao.TeacherDAO;
 import cn.edu.zucc.shijf.entity.Teacher;
+import org.hibernate.Query;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by wetsaid on 6/5/2016.
  */
 public class TeacherService {
+
+    public static final String ACCOUNT = "teacherAccount";
 
     @Resource
     private TeacherDAO teacherDAO;
@@ -34,5 +38,9 @@ public class TeacherService {
     public void deleteTeacher(Teacher teacher) {
         System.out.println("------TeacherService.deleteTeacher--------" + teacher.getTeacherName());
         teacherDAO.deleteTeacher(teacher);
+    }
+
+    public List findByTeacherAccount(Object account) {
+        return teacherDAO.findByProperty(ACCOUNT, account);
     }
 }

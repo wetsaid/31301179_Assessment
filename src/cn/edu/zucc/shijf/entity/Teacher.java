@@ -30,8 +30,8 @@ public class Teacher {
     }
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "assigned")
+    @GeneratedValue(generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     public String getTeacherId() {
         return teacherId;
     }

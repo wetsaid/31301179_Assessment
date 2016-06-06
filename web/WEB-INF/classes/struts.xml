@@ -3,10 +3,13 @@
         "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
     <!-- 将action托管给spring -->
-    <constant name="struts.objectFactory" value="spring"></constant>
+    <constant name="struts.objectFactory" value="spring"/>
     <package name="struts" extends="struts-default">
-        <action name="user" class="userAction"></action>
-        <action name="index" class="indexAction"></action>
-        <action name="blog" class="blogAction"></action>
+        <action name="user" class="userAction"/>
+        <action name="index" class="indexAction"/>
+        <action name="blog" class="blogAction"/>
+
+        <!--分割线-->
+        <action name="teacher" class="teacherAction"/>
     </package>
-</struts>      
+</struts>

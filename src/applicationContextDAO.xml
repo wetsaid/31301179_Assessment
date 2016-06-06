@@ -14,14 +14,10 @@
 
 
     <bean id="UserDAO" class="com.sshhw.core.UserDAO">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory"/>
-        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="BlogDAO" class="com.sshhw.core.BlogDAO">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory"/>
-        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <!--分割线-->

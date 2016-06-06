@@ -90,7 +90,6 @@ public class UserAction extends BaseAction {
             }
         }
 
-
     }
 
     public void showManageCenter() {

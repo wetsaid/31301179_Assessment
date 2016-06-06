@@ -24,8 +24,8 @@ public class CourseType {
     }
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "assigned")
+    @GeneratedValue(generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     public String getCourseTypeId() {
         return courseTypeId;
     }
