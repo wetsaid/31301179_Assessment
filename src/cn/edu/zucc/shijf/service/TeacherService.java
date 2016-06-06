@@ -1,0 +1,38 @@
+package cn.edu.zucc.shijf.service;
+
+import cn.edu.zucc.shijf.dao.TeacherDAO;
+import cn.edu.zucc.shijf.entity.Teacher;
+
+import javax.annotation.Resource;
+
+/**
+ * Created by wetsaid on 6/5/2016.
+ */
+public class TeacherService {
+
+    @Resource
+    private TeacherDAO teacherDAO;
+
+    public TeacherDAO getTeacherDAO() {
+        return teacherDAO;
+    }
+
+    public void setTeacherDAO(TeacherDAO teacherDAO) {
+        this.teacherDAO = teacherDAO;
+    }
+
+    public void addTeacher(Teacher teacher) {
+        System.out.println("------TeacherService.addTeacher--------" + teacher.getTeacherName());
+        teacherDAO.addTeacher(teacher);
+    }
+
+    public void updateTeacher(Teacher teacher) {
+        System.out.println("------TeacherService.updateTeacher--------" + teacher.getTeacherName());
+        teacherDAO.updateTeacher(teacher);
+    }
+
+    public void deleteTeacher(Teacher teacher) {
+        System.out.println("------TeacherService.deleteTeacher--------" + teacher.getTeacherName());
+        teacherDAO.deleteTeacher(teacher);
+    }
+}
