@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class TeacherAction extends BaseAction {
 
+    private static final String TEACHER = "Teacher";
+    private static final String ACCOUNT = "teacherAccount";
     private Teacher teacher;
 
     @Resource
@@ -52,7 +54,7 @@ public class TeacherAction extends BaseAction {
     }
 
     public void login() throws IOException {
-        List list = teacherService.findByTeacherAccount(teacher.getTeacherAccount());
+        List list = teacherService.findByProperty(TEACHER, ACCOUNT, teacher.getTeacherAccount());
         if (list == null || list.size() < 1) {
             this.alertRedirect("教师账号不存在", "index.jsp");
         } else {

@@ -11,5 +11,7 @@
 
         <!--分割线-->
         <action name="teacher" class="teacherAction"/>
+        <action name="student" class="studentAction"/>
+        <action name="systemUser" class="systemUserAction"/>
     </package>
 </struts>

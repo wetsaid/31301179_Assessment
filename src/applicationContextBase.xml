@@ -14,7 +14,7 @@
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/j2ee"/>
+        <property name="jdbcUrl" value="jdbc:mysql://10.66.4.100:3306/j2ee"/>
         <property name="user" value="root"/>
         <property name="password" value="oracle"/>
         <!--初始化时获取三个连接，取值应在minPoolSize与maxPoolSize之间。Default: 3 -->
@@ -44,6 +44,7 @@
                 <prop key="hibernate.dialect">
                     org.hibernate.dialect.MySQLDialect
                 </prop>
+                <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
         <property name="annotatedClasses">
@@ -85,15 +86,15 @@
 
     <!-- 那些类的哪些方法参与事务 -->
     <aop:config>
-        <aop:pointcut id="allServiceMethod" expression="execution(* com.sshhw.service.*.*(..))"/>
+        <aop:pointcut id="allServiceMethod" expression="execution(* cn.edu.zucc.shijf.service.*.*(..))"/>
         <aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice"/>
     </aop:config>
 
     <!-- Sql服务类，弥补hibernate连接查询低效率的不足，依旧是有hibernate管理session -->
-    <bean id="sqlService" class="com.sshhw.service.SqlService">
+    <bean id="sqlService" class="cn.edu.zucc.shijf.service.SqlService">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="baseAction" class="com.sshhw.web.BaseAction"/>
+    <bean id="baseAction" class="cn.edu.zucc.shijf.action.BaseAction"/>
 
 </beans>

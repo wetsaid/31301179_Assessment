@@ -19,9 +19,9 @@
 </head>
 
 <body>
-<form action="teacher!login.action" method="post">
-    用户名：<input type="text" name="teacher.teacherAccount"/><br/>
-    密码：<input type="text" name="teacher.teacherPassword"/><br/>
+<form action="systemUser!login.action" method="post">
+    用户名：<input type="text" name="systemUser.userAccount"/><br/>
+    密码：<input type="text" name="systemUser.userPassword"/><br/>
     <input type="submit" value="登录"/><br/>
 </form>
 </body>

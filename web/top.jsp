@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<h1>SSH综合作业--用户，博客相关功能</h1>
+<h1>31301179_教学质量评估系统</h1>
 <div style="text-align: right;">
 	<c:if test="${sessionScope.username==null}">
 	<a href="register.jsp">注册</a>

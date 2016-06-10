@@ -41,19 +41,16 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 
     @Override
     public void setSession(Map<String, Object> session) {
-        // TODO Auto-generated method stub
         this.session = session;
     }
 
     @Override
     public void setApplication(Map<String, Object> application) {
-        // TODO Auto-generated method stub
         this.application = application;
     }
 
     @Override
     public void setCookiesMap(Map<String, String> cookies) {
-        // TODO Auto-generated method stub
         this.cookies = cookies;
     }
 
@@ -67,7 +64,6 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
             this.request.getRequestDispatcher(path).forward(this.request,
                     this.response);
         } catch (ServletException | IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -89,7 +85,6 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
             out.flush();
             out.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -106,7 +101,6 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
                 byte[] bs = str.getBytes("ISO8859-1");
                 str = new String(bs, "UTF-8");
             } catch (UnsupportedEncodingException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }

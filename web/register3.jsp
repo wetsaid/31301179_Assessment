@@ -20,10 +20,10 @@
 
 <body>
 <%@include file="top.jsp" %>
-<form action="teacher!register.action" method="post">
-    用户名：<input type="text" name="teacher.teacherAccount"/><br/>
-    密码：<input type="text" name="teacher.teacherPassword"/><br/>
-    姓名：<input type="text" name="teacher.teacherName"/><br/>
+<form action="systemUser!register.action" method="post">
+    用户名：<input type="text" name="systemUser.userAccount"/><br/>
+    密码：<input type="text" name="systemUser.userPassword"/><br/>
+    姓名：<input type="text" name="systemUser.userName"/><br/>
     <input type="submit" value="注册"/><br/>
 </form>
 

@@ -72,7 +72,4 @@ public class BlogAction extends BaseAction {
 		sqlService.executeDelete("blog", blogId);
 		this.response.sendRedirect("user!showManageCenter.action");
 	}
-
-	
-
 }
