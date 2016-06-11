@@ -24,7 +24,7 @@ public class BaseDAO<T> {
     public BaseDAO() {
         ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
         clazz = (Class<T>) type.getActualTypeArguments()[0];
-        //	System.out.println("DAO的真实实现类是：" + this.clazz.getName());
+//        System.out.println("DAO的真实实现类是：" + this.clazz.getName());
     }
 
     public Session getSession() {
@@ -52,7 +52,10 @@ public class BaseDAO<T> {
         return (T) this.getSession().get(this.clazz, id);
     }
 
-    public List findByProperty(String tableName, String propertyName, Object value) {
+    public List findByProperty(String propertyName, Object value) {
+        //去掉类名前面的包名
+        String tableName = this.clazz.getName();
+        tableName = tableName.substring(tableName.lastIndexOf('.') + 1);
         String queryString = "from " + tableName + " as model where model." + propertyName + "= ?";
         Query queryObject = getSession().createQuery(queryString);
         queryObject.setParameter(0, value);

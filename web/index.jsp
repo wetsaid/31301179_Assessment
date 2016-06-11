@@ -4,7 +4,7 @@
 <html>
 <head>
 
-    <title>ssh综合作业--首页</title>
+    <title>31301179_教学质量评估系统</title>
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">

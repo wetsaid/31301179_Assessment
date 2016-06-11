@@ -13,6 +13,7 @@ import java.sql.SQLException;
 public class MyReturningWork implements ReturningWork<ResultSet> {
 
     private String sql;
+    private Object[] params;
 
     public String getSql() {
         return sql;
@@ -21,8 +22,6 @@ public class MyReturningWork implements ReturningWork<ResultSet> {
     public void setSql(String sql) {
         this.sql = sql;
     }
-
-    private Object[] params;
 
     public Object[] getParams() {
         return params;

@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class SystemUserAction extends BaseAction {
 
-    private static final String STSTEMUSER = "SystemUser";
     private static final String ACCOUNT = "userAccount";
     private SystemUser systemUser;
     private SystemUserService systemUserService;
@@ -51,12 +50,14 @@ public class SystemUserAction extends BaseAction {
     }
 
     public void login() throws IOException {
-        List list = systemUserService.findByProperty(STSTEMUSER, ACCOUNT, systemUser.getUserAccount());
+        List list = systemUserService.findByProperty(ACCOUNT, systemUser.getUserAccount());
         if (list == null || list.size() < 1) {
             this.alertRedirect("管理员账号不存在", "index.jsp");
         } else {
             SystemUser oldSystemUser = (SystemUser) list.get(0);
             if (systemUser.getUserPassword().equals(oldSystemUser.getUserPassword())) {
+                session.put("userId", oldSystemUser.getUserId());
+                session.put("userName", oldSystemUser.getUserName());
                 this.response.sendRedirect("top.jsp");
             } else {
                 this.alertRedirect("错误！", "fail.jsp");
@@ -65,6 +66,17 @@ public class SystemUserAction extends BaseAction {
     }
 
     public void register() throws IOException {
+        if ("".equals(systemUser.getUserAccount()) || systemUser.getUserAccount() == null) {
+            this.alertRedirect("管理员帐号不得为空！", "register3.jsp");
+            return;
+        }
+
+        List list = systemUserService.findByProperty(ACCOUNT, systemUser.getUserAccount());
+        if (list.size() >= 1) {
+            this.alertRedirect("管理员账号已存在！", "register3.jsp");
+            return;
+        }
+
         systemUserService.addSystemUser(systemUser);
         this.response.sendRedirect("index.jsp");
     }

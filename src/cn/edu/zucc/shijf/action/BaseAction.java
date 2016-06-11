@@ -13,6 +13,9 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
+/**
+ * Created by wetsaid on 2016/6/10.
+ */
 public class BaseAction extends ActionSupport implements ServletRequestAware,
         ServletResponseAware, ServletContextAware, SessionAware,
         ApplicationAware, CookiesAware {
@@ -67,6 +70,25 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
             e.printStackTrace();
         }
     }
+//
+//    /**
+//     * 弹框
+//     *
+//     * @param msg
+//     */
+//    public void alert(String msg) {
+//        try {
+//            this.response.setContentType("text/html;charset=utf8");
+//            PrintWriter out = this.response.getWriter();
+//            out.print("<script>");
+//            out.print("alert('" + msg + "');");
+//            out.print("</script>");
+//            out.flush();
+//            out.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * 先弹框，再重定向

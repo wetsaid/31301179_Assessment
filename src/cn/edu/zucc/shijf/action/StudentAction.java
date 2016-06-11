@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class StudentAction extends BaseAction {
 
-    private static final String STUDENT = "Student";
     private static final String ACCOUNT = "studentAccount";
     private Student student;
     private StudentService studentService;
@@ -51,13 +50,15 @@ public class StudentAction extends BaseAction {
     }
 
     public void login() throws IOException {
-        List list = studentService.findByProperty(STUDENT, ACCOUNT, student.getStudentAccount());
+        List list = studentService.findByProperty(ACCOUNT, student.getStudentAccount());
         System.out.println("end");
         if (list == null || list.size() < 1) {
             this.alertRedirect("学生账号不存在", "index.jsp");
         } else {
             Student oldStudent = (Student) list.get(0);
             if (student.getStudentPassword().equals(oldStudent.getStudentPassword())) {
+                session.put("studentId", oldStudent.getStudentId());
+                session.put("studentName", oldStudent.getStudentName());
                 this.response.sendRedirect("top.jsp");
             } else {
                 this.alertRedirect("错误！", "fail.jsp");
@@ -66,6 +67,17 @@ public class StudentAction extends BaseAction {
     }
 
     public void register() throws IOException {
+        if ("".equals(student.getStudentAccount()) || student.getStudentAccount() == null) {
+            this.alertRedirect("学生帐号不得为空！", "register3.jsp");
+            return;
+        }
+
+        List list = studentService.findByProperty(ACCOUNT, student.getStudentAccount());
+        if (list.size() >= 1) {
+            this.alertRedirect("学生账号已存在！", "register3.jsp");
+            return;
+        }
+
         studentService.addStudent(student);
         this.response.sendRedirect("index.jsp");
     }

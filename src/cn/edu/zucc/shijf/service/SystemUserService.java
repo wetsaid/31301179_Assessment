@@ -35,7 +35,7 @@ public class SystemUserService {
         systemUserDAO.delete(systemUser.getUserId());
     }
 
-    public List findByProperty(String tableName, String propertyName, Object value) {
-        return systemUserDAO.findByProperty(tableName, propertyName, value);
+    public List findByProperty(String propertyName, Object value) {
+        return systemUserDAO.findByProperty(propertyName, value);
     }
 }

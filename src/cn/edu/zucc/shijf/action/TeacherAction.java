@@ -3,7 +3,6 @@ package cn.edu.zucc.shijf.action;
 import cn.edu.zucc.shijf.entity.Teacher;
 import cn.edu.zucc.shijf.service.TeacherService;
 
-import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.List;
 
@@ -12,11 +11,8 @@ import java.util.List;
  */
 public class TeacherAction extends BaseAction {
 
-    private static final String TEACHER = "Teacher";
     private static final String ACCOUNT = "teacherAccount";
     private Teacher teacher;
-
-    @Resource
     private TeacherService teacherService;
 
     public Teacher getTeacher() {
@@ -54,12 +50,14 @@ public class TeacherAction extends BaseAction {
     }
 
     public void login() throws IOException {
-        List list = teacherService.findByProperty(TEACHER, ACCOUNT, teacher.getTeacherAccount());
+        List list = teacherService.findByProperty(ACCOUNT, teacher.getTeacherAccount());
         if (list == null || list.size() < 1) {
             this.alertRedirect("教师账号不存在", "index.jsp");
         } else {
             Teacher oldTeacher = (Teacher) list.get(0);
             if (teacher.getTeacherPassword().equals(oldTeacher.getTeacherPassword())) {
+                session.put("teacherId", oldTeacher.getTeacherId());
+                session.put("teacherName", oldTeacher.getTeacherName());
                 this.response.sendRedirect("top.jsp");
             } else {
                 this.alertRedirect("错误！", "fail.jsp");
@@ -68,6 +66,17 @@ public class TeacherAction extends BaseAction {
     }
 
     public void register() throws IOException {
+        if ("".equals(teacher.getTeacherAccount()) || teacher.getTeacherAccount() == null) {
+            this.alertRedirect("教师帐号不得为空！", "register3.jsp");
+            return;
+        }
+
+        List list = teacherService.findByProperty(ACCOUNT, teacher.getTeacherAccount());
+        if (list.size() >= 1) {
+            this.alertRedirect("教师账号已存在！", "register3.jsp");
+            return;
+        }
+
         teacherService.addTeacher(teacher);
         this.response.sendRedirect("index.jsp");
     }

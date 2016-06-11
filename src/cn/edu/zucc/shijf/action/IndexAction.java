@@ -1,12 +1,12 @@
 package cn.edu.zucc.shijf.action;
 
-import com.sshhw.web.BaseAction;
-
+/**
+ * Created by wetsaid on 2016/6/10.
+ */
 public class IndexAction extends BaseAction {
-	
-	public void show()
-	{
-		this.forward("index.jsp");
-	}
-	
+
+    public void show() {
+        this.forward("index.jsp");
+    }
+
 }

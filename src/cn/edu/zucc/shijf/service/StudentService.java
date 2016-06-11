@@ -35,7 +35,7 @@ public class StudentService {
         studentDAO.delete(student.getStudentId());
     }
 
-    public List findByProperty(String tableName, String propertyName, Object value) {
-        return studentDAO.findByProperty(tableName, propertyName, value);
+    public List findByProperty(String propertyName, Object value) {
+        return studentDAO.findByProperty(propertyName, value);
     }
 }

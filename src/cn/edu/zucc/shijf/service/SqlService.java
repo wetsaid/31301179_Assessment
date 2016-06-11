@@ -10,8 +10,9 @@ import java.sql.ResultSet;
 import java.util.SortedMap;
 
 /**
- * Created by wetsaid on 6/2/2016.
  * SQL服务类
+ *
+ * Created by wetsaid on 6/2/2016.
  */
 public class SqlService {
 
@@ -30,7 +31,6 @@ public class SqlService {
 	 * @param instance
 	 */
 	public void updateObject(Object instance) {
-
 		try {
 			this.sessionFactory.getCurrentSession().update(instance);
 		} catch (RuntimeException re) {

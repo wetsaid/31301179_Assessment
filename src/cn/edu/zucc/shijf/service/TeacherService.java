@@ -3,7 +3,6 @@ package cn.edu.zucc.shijf.service;
 import cn.edu.zucc.shijf.dao.TeacherDAO;
 import cn.edu.zucc.shijf.entity.Teacher;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -11,7 +10,6 @@ import java.util.List;
  */
 public class TeacherService {
 
-    @Resource
     private TeacherDAO teacherDAO;
 
     public TeacherDAO getTeacherDAO() {
@@ -37,7 +35,7 @@ public class TeacherService {
         teacherDAO.delete(teacher.getTeacherId());
     }
 
-    public List findByProperty(String tableName, String propertyName, Object value) {
-        return teacherDAO.findByProperty(tableName, propertyName, value);
+    public List findByProperty(String propertyName, Object value) {
+        return teacherDAO.findByProperty(propertyName, value);
     }
 }
