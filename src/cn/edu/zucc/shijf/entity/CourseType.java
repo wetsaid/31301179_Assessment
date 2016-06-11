@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "course_type")
 public class CourseType {
 
-    private String courseTypeId;
+    private int courseTypeId;
     private int branchId;
     private String courseTypeCode;
     private String courseTypeName;
@@ -26,11 +26,11 @@ public class CourseType {
     @Id
     @GeneratedValue(generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    public String getCourseTypeId() {
+    public int getCourseTypeId() {
         return courseTypeId;
     }
 
-    public void setCourseTypeId(String courseTypeId) {
+    public void setCourseTypeId(int courseTypeId) {
         this.courseTypeId = courseTypeId;
     }
 

@@ -1,6 +1,8 @@
 package cn.edu.zucc.shijf.action;
 
 import cn.edu.zucc.shijf.entity.Teacher;
+import cn.edu.zucc.shijf.page.PageBean;
+import cn.edu.zucc.shijf.service.CourseService;
 import cn.edu.zucc.shijf.service.TeacherService;
 
 import java.io.IOException;
@@ -12,8 +14,27 @@ import java.util.List;
 public class TeacherAction extends BaseAction {
 
     private static final String ACCOUNT = "teacherAccount";
+    private int pageSize;
+    private int page;
     private Teacher teacher;
     private TeacherService teacherService;
+    private CourseService courseService;
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
 
     public Teacher getTeacher() {
         return teacher;
@@ -29,6 +50,14 @@ public class TeacherAction extends BaseAction {
 
     public void setTeacherService(TeacherService teacherService) {
         this.teacherService = teacherService;
+    }
+
+    public CourseService getCourseService() {
+        return courseService;
+    }
+
+    public void setCourseService(CourseService courseService) {
+        this.courseService = courseService;
     }
 
     public String addTeacher() {
@@ -80,5 +109,15 @@ public class TeacherAction extends BaseAction {
 
         teacherService.addTeacher(teacher);
         this.response.sendRedirect("index.jsp");
+    }
+
+    public void showManageCenter() {
+        int teacherId = (int) session.get("teacherId");
+        PageBean pageBean = courseService.loadTeachersCoursesByPage(teacherId, pageSize, page);
+        this.request.setAttribute("courses", pageBean.getList());
+        this.request.setAttribute("coursesCurrentPage", pageBean.getCurrentPage());
+        this.request.setAttribute("coursesTotalPage", pageBean.getTotalPage());
+        this.request.setAttribute("coursesAllRow", pageBean.getAllRow());
+        this.forward("manageCenterTeacher.jsp");
     }
 }

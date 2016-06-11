@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name = "student")
 public class Student {
 
-    private String studentId;
+    private int studentId;
     private int branchId;
     private String studentAccount;
     private String studentPassword;
@@ -32,11 +32,11 @@ public class Student {
     @Id
     @GeneratedValue(generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    public String getStudentId() {
+    public int getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
 

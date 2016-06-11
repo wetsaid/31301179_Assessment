@@ -33,6 +33,7 @@
     <!-- 分割线 -->
     <bean id="teacherAction" class="cn.edu.zucc.shijf.action.TeacherAction">
         <property name="teacherService" ref="teacherService"/>
+        <property name="courseService" ref="courseService"/>
     </bean>
     <bean id="studentAction" class="cn.edu.zucc.shijf.action.StudentAction">
         <property name="studentService" ref="studentService"/>

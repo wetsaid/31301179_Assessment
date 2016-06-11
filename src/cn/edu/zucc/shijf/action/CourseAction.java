@@ -3,6 +3,8 @@ package cn.edu.zucc.shijf.action;
 import cn.edu.zucc.shijf.entity.Course;
 import cn.edu.zucc.shijf.service.CourseService;
 
+import java.util.List;
+
 /**
  * Created by wetsaid on 6/11/2016.
  */
@@ -37,8 +39,8 @@ public class CourseAction extends BaseAction {
         return "success";
     }
 
-    public String deleteCourse() {
-        courseService.deleteCourse(course);
+    public String deleteCourse(int courseId) {
+        courseService.deleteCourse(courseId);
         return "success";
     }
 }

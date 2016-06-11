@@ -94,18 +94,17 @@ public class BaseDAO<T> {
         }
         query.setFirstResult(offset);
         query.setMaxResults(length);
-        List<T> list = query.list();
-        return list;
+        return query.list();
     }
 
-    public PageBean findForPage(String hql, final Object[] values, int pageSize, int page) {
-        int allRow = getAllRowCount(hql, values);    //总记录数
+    public PageBean findForPage(String hql, final Object[] params, int pageSize, int page) {
+        int allRow = getAllRowCount(hql, params);    //总记录数
         int totalPage = PageBean.countTotalPage(pageSize, allRow);    //总页数
         final int currentPage = PageBean.countCurrentPage(page);
         final int offset = PageBean.countOffset(pageSize, currentPage);    //当前页开始记录
         final int length = pageSize;    //每页记录数
 
-        List<T> list = queryForPage(hql, values, offset, length);
+        List<T> list = queryForPage(hql, params, offset, length);
         //把分页信息保存到Bean中
         PageBean pageBean = new PageBean();
         pageBean.setPageSize(pageSize);

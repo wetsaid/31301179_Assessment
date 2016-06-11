@@ -16,7 +16,7 @@
 
     <c:if test="${sessionScope.userType=='teacher'}">
         欢迎${sessionScope.teacherName}回来！
-        <a href="user!showManageCenter.action">管理中心</a>
+        <a href="teacher!showManageCenter.action?pageSize=15&page=1">管理中心</a>
         <a href="#">注销</a>
     </c:if>
 

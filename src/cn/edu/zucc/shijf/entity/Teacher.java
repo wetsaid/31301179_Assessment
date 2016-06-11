@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "teacher")
 public class Teacher {
 
-    private String teacherId;
+    private int teacherId;
     private int branchId;
     private String teacherAccount;
     private String teacherPassword;
@@ -32,11 +32,11 @@ public class Teacher {
     @Id
     @GeneratedValue(generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    public String getTeacherId() {
+    public int getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(String teacherId) {
+    public void setTeacherId(int teacherId) {
         this.teacherId = teacherId;
     }
 

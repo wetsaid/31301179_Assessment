@@ -14,13 +14,14 @@ import javax.persistence.Table;
 @Table(name = "course")
 public class Course {
 
-    private String courseId;
-    private String teacherId;
+    private int courseId;
+    private int teacherId;
     private String courseTypeId;
+    private String courseName;
     private String courseCode;
     private String courseTime;
     private String courseLocation;
-    private String courseCapacity;
+    private int courseCapacity;
     private String startEndWeek;
     private String courseStatus;
 
@@ -30,19 +31,19 @@ public class Course {
     @Id
     @GeneratedValue(generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    public String getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 
-    public String getTeacherId() {
+    public int getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(String teacherId) {
+    public void setTeacherId(int teacherId) {
         this.teacherId = teacherId;
     }
 
@@ -52,6 +53,14 @@ public class Course {
 
     public void setCourseTypeId(String courseTypeId) {
         this.courseTypeId = courseTypeId;
+    }
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
     public String getCourseCode() {
@@ -78,11 +87,11 @@ public class Course {
         this.courseLocation = courseLocation;
     }
 
-    public String getCourseCapacity() {
+    public int getCourseCapacity() {
         return courseCapacity;
     }
 
-    public void setCourseCapacity(String courseCapacity) {
+    public void setCourseCapacity(int courseCapacity) {
         this.courseCapacity = courseCapacity;
     }
 

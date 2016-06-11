@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "system_users")
 public class SystemUser {
 
-    private String userId;
+    private int userId;
     private String userAccount;
     private String userPassword;
     private String userName;
@@ -27,11 +27,11 @@ public class SystemUser {
     @Id
     @GeneratedValue(generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
