@@ -26,4 +26,8 @@
     <bean id="systemUserDAO" class="cn.edu.zucc.shijf.dao.SystemUserDAO">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean id="courseDAO" class="cn.edu.zucc.shijf.dao.CourseDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
 </beans>

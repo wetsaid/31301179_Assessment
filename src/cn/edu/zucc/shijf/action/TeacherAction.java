@@ -52,15 +52,16 @@ public class TeacherAction extends BaseAction {
     public void login() throws IOException {
         List list = teacherService.findByProperty(ACCOUNT, teacher.getTeacherAccount());
         if (list == null || list.size() < 1) {
-            this.alertRedirect("教师账号不存在", "index.jsp");
+            this.alertRedirect("教师账号不存在", "loginTeacher.jsp");
         } else {
             Teacher oldTeacher = (Teacher) list.get(0);
             if (teacher.getTeacherPassword().equals(oldTeacher.getTeacherPassword())) {
                 session.put("teacherId", oldTeacher.getTeacherId());
                 session.put("teacherName", oldTeacher.getTeacherName());
-                this.response.sendRedirect("top.jsp");
+                session.put("userType", "teacher");
+                this.response.sendRedirect("index.jsp");
             } else {
-                this.alertRedirect("错误！", "fail.jsp");
+                this.alertRedirect("密码错误！", "loginTeacher.jsp");
             }
         }
     }

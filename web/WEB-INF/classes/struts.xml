@@ -13,5 +13,7 @@
         <action name="teacher" class="teacherAction"/>
         <action name="student" class="studentAction"/>
         <action name="systemUser" class="systemUserAction"/>
+        <action name="course" class="courseAction"/>
+
     </package>
 </struts>

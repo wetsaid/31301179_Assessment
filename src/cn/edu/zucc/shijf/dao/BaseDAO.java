@@ -71,7 +71,7 @@ public class BaseDAO<T> {
     }
 
     public int getAllRowCount(String hql, final Object[] params) {
-        Query query = getSession().createQuery(hql.toString());
+        Query query = getSession().createQuery(hql);
         for (int i = 0; params != null && i < params.length; i++) {
             query.setParameter(i, params[i]);
         }

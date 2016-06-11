@@ -40,5 +40,8 @@
     <bean id="systemUserAction" class="cn.edu.zucc.shijf.action.SystemUserAction">
         <property name="systemUserService" ref="systemUserService"/>
     </bean>
+    <bean id="courseAction" class="cn.edu.zucc.shijf.action.CourseAction">
+        <property name="courseService" ref="courseService"/>
+    </bean>
 
 </beans>

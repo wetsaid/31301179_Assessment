@@ -18,5 +18,8 @@
     <bean id="systemUserService" class="cn.edu.zucc.shijf.service.SystemUserService">
         <property name="systemUserDAO" ref="systemUserDAO"/>
     </bean>
+    <bean id="courseService" class="cn.edu.zucc.shijf.service.CourseService">
+        <property name="courseDAO" ref="courseDAO"/>
+    </bean>
 
 </beans>

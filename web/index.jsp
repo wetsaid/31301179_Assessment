@@ -17,6 +17,5 @@
 
 <body>
 <%@include file="top.jsp" %>
-<%@include file="login3.jsp" %>
 </body>
 </html>

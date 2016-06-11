@@ -53,15 +53,16 @@ public class StudentAction extends BaseAction {
         List list = studentService.findByProperty(ACCOUNT, student.getStudentAccount());
         System.out.println("end");
         if (list == null || list.size() < 1) {
-            this.alertRedirect("学生账号不存在", "index.jsp");
+            this.alertRedirect("学生账号不存在", "loginStudent.jsp");
         } else {
             Student oldStudent = (Student) list.get(0);
             if (student.getStudentPassword().equals(oldStudent.getStudentPassword())) {
                 session.put("studentId", oldStudent.getStudentId());
                 session.put("studentName", oldStudent.getStudentName());
-                this.response.sendRedirect("top.jsp");
+                session.put("userType", "student");
+                this.response.sendRedirect("index.jsp");
             } else {
-                this.alertRedirect("错误！", "fail.jsp");
+                this.alertRedirect("密码错误！", "loginStudent.jsp");
             }
         }
     }

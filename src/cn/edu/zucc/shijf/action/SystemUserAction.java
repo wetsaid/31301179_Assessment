@@ -52,15 +52,16 @@ public class SystemUserAction extends BaseAction {
     public void login() throws IOException {
         List list = systemUserService.findByProperty(ACCOUNT, systemUser.getUserAccount());
         if (list == null || list.size() < 1) {
-            this.alertRedirect("管理员账号不存在", "index.jsp");
+            this.alertRedirect("管理员账号不存在", "loginSystemUser.jsp");
         } else {
             SystemUser oldSystemUser = (SystemUser) list.get(0);
             if (systemUser.getUserPassword().equals(oldSystemUser.getUserPassword())) {
                 session.put("userId", oldSystemUser.getUserId());
                 session.put("userName", oldSystemUser.getUserName());
-                this.response.sendRedirect("top.jsp");
+                session.put("userType", "systemUser");
+                this.response.sendRedirect("index.jsp");
             } else {
-                this.alertRedirect("错误！", "fail.jsp");
+                this.alertRedirect("密码错误！", "loginSystemUser.jsp");
             }
         }
     }
