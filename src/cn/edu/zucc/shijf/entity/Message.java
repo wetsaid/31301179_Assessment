@@ -16,7 +16,7 @@ import java.util.Date;
 public class Message {
 
     private int messageId;
-    private String courseId;
+    private int courseId;
     private String senderType;
     private String senderAccount;
     private String receiverType;
@@ -39,11 +39,11 @@ public class Message {
         this.messageId = messageId;
     }
 
-    public String getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 

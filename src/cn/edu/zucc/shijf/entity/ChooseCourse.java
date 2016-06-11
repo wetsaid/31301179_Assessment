@@ -15,8 +15,8 @@ import javax.persistence.Table;
 public class ChooseCourse {
 
     private int chooseCouresId;
-    private String studentId;
-    private String courseId;
+    private int studentId;
+    private int courseId;
     private String courseSemester;
     private int contentEvaluate;
     private int attitudeEvaluate;
@@ -38,19 +38,19 @@ public class ChooseCourse {
         this.chooseCouresId = chooseCouresId;
     }
 
-    public String getStudentId() {
+    public int getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(String studentId) {
+    public void setStudentId(int studentId) {
         this.studentId = studentId;
     }
 
-    public String getCourseId() {
+    public int getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
+    public void setCourseId(int courseId) {
         this.courseId = courseId;
     }
 
