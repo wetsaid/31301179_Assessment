@@ -97,13 +97,13 @@ public class TeacherAction extends BaseAction {
 
     public void register() throws IOException {
         if ("".equals(teacher.getTeacherAccount()) || teacher.getTeacherAccount() == null) {
-            this.alertRedirect("教师帐号不得为空！", "register3.jsp");
+            this.alertRedirect("教师帐号不得为空！", "registerTeacher.jsp");
             return;
         }
 
         List list = teacherService.findByProperty(ACCOUNT, teacher.getTeacherAccount());
         if (list.size() >= 1) {
-            this.alertRedirect("教师账号已存在！", "register3.jsp");
+            this.alertRedirect("教师账号已存在！", "registerTeacher.jsp");
             return;
         }
 
@@ -115,8 +115,8 @@ public class TeacherAction extends BaseAction {
         int teacherId = (int) session.get("teacherId");
         PageBean pageBean = courseService.loadTeachersCoursesByPage(teacherId, pageSize, page);
         request.setAttribute("courses", pageBean.getList());
-        request.setAttribute("coursesTotalPage", pageBean.getTotalPage());
-        request.setAttribute("coursesAllRow", pageBean.getAllRow());
+        session.put("coursesTotalPage", pageBean.getTotalPage());
+        session.put("coursesAllRow", pageBean.getAllRow());
         session.put("coursesPageSize", pageBean.getPageSize());
         session.put("coursesCurrentPage", pageBean.getCurrentPage());
         this.forward("manageCenterTeacher.jsp");

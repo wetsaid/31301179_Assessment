@@ -2,10 +2,7 @@ package cn.edu.zucc.shijf.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by wetsaid on 6/2/2016.
@@ -14,11 +11,12 @@ import javax.persistence.Table;
 @Table(name = "choose_course")
 public class ChooseCourse {
 
-    private int chooseCouresId;
+    private int chooseCourseId;
     private int studentId;
     private int courseId;
     private String courseSemester;
     private int contentEvaluate;
+    private int techniqueEvaluate;
     private int attitudeEvaluate;
     private int effectEvaluate;
     private int generalEvaluate;
@@ -30,12 +28,12 @@ public class ChooseCourse {
     @Id
     @GeneratedValue(generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    public int getChooseCouresId() {
-        return chooseCouresId;
+    public int getChooseCourseId() {
+        return chooseCourseId;
     }
 
-    public void setChooseCouresId(int chooseCouresId) {
-        this.chooseCouresId = chooseCouresId;
+    public void setChooseCourseId(int chooseCouresId) {
+        this.chooseCourseId = chooseCouresId;
     }
 
     public int getStudentId() {
@@ -54,6 +52,7 @@ public class ChooseCourse {
         this.courseId = courseId;
     }
 
+    @Transient
     public String getCourseSemester() {
         return courseSemester;
     }
@@ -68,6 +67,14 @@ public class ChooseCourse {
 
     public void setContentEvaluate(int contentEvaluate) {
         this.contentEvaluate = contentEvaluate;
+    }
+
+    public int getTechniqueEvaluate() {
+        return techniqueEvaluate;
+    }
+
+    public void setTechniqueEvaluate(int techniqueEvaluate) {
+        this.techniqueEvaluate = techniqueEvaluate;
     }
 
     public int getAttitudeEvaluate() {

@@ -2,10 +2,7 @@ package cn.edu.zucc.shijf.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by wetsaid on 6/2/2016.
@@ -16,6 +13,7 @@ public class Course {
 
     private int courseId;
     private int teacherId;
+    private String teacherName;
     private int courseTypeId;
     private String courseName;
     private String courseCode;
@@ -45,6 +43,15 @@ public class Course {
 
     public void setTeacherId(int teacherId) {
         this.teacherId = teacherId;
+    }
+
+    @Transient
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     public int getCourseTypeId() {

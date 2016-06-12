@@ -6,43 +6,20 @@
 
     <bean id="indexAction" class="cn.edu.zucc.shijf.action.IndexAction" parent="baseAction"/>
 
-    <!--<bean id="userAction" class="com.sshhw.web.UserAction" parent="baseAction">-->
-        <!--<property name="blogService">-->
-            <!--<ref bean="blogService"/>-->
-        <!--</property>-->
-        <!--<property name="userService">-->
-            <!--<ref bean="userService"/>-->
-        <!--</property>-->
-        <!--<property name="sqlService">-->
-            <!--<ref bean="sqlService"/>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-    <!--<bean id="blogAction" class="com.sshhw.web.BlogAction" parent="baseAction">-->
-        <!--<property name="blogService">-->
-            <!--<ref bean="blogService"/>-->
-        <!--</property>-->
-        <!--<property name="sqlService">-->
-            <!--<ref bean="sqlService"/>-->
-        <!--</property>-->
-        <!--<property name="userService">-->
-            <!--<ref bean="userService"/>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-    <!-- 分割线 -->
     <bean id="teacherAction" class="cn.edu.zucc.shijf.action.TeacherAction">
         <property name="teacherService" ref="teacherService"/>
         <property name="courseService" ref="courseService"/>
     </bean>
     <bean id="studentAction" class="cn.edu.zucc.shijf.action.StudentAction">
         <property name="studentService" ref="studentService"/>
+        <property name="courseService" ref="courseService"/>
     </bean>
     <bean id="systemUserAction" class="cn.edu.zucc.shijf.action.SystemUserAction">
         <property name="systemUserService" ref="systemUserService"/>
     </bean>
     <bean id="courseAction" class="cn.edu.zucc.shijf.action.CourseAction">
         <property name="courseService" ref="courseService"/>
+        <property name="chooseCourseService" ref="chooseCourseService"/>
     </bean>
 
 </beans>

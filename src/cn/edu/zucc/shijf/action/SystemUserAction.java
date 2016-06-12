@@ -68,13 +68,13 @@ public class SystemUserAction extends BaseAction {
 
     public void register() throws IOException {
         if ("".equals(systemUser.getUserAccount()) || systemUser.getUserAccount() == null) {
-            this.alertRedirect("管理员帐号不得为空！", "register3.jsp");
+            this.alertRedirect("管理员帐号不得为空！", "registerSystemUser.jsp");
             return;
         }
 
         List list = systemUserService.findByProperty(ACCOUNT, systemUser.getUserAccount());
         if (list.size() >= 1) {
-            this.alertRedirect("管理员账号已存在！", "register3.jsp");
+            this.alertRedirect("管理员账号已存在！", "registerSystemUser.jsp");
             return;
         }
 

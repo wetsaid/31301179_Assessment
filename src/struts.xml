@@ -10,6 +10,7 @@
         <action name="blog" class="blogAction"/>
 
         <!--分割线-->
+        <action name="base" class="baseAction"/>
         <action name="teacher" class="teacherAction"/>
         <action name="student" class="studentAction"/>
         <action name="systemUser" class="systemUserAction"/>

@@ -1,13 +1,13 @@
 package com.sshhw.web;
 
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.List;
-
 import com.sshhw.core.User;
 import com.sshhw.service.BlogService;
 import com.sshhw.service.SqlService;
 import com.sshhw.service.UserService;
+
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.List;
 
 public class UserAction extends BaseAction {
 
@@ -99,7 +99,7 @@ public class UserAction extends BaseAction {
 
         this.request.setAttribute("l", l);
 
-        this.forward("manageCenter.jsp");
+        this.forward("manageCenterStudent.jsp");
     }
 
     public void showSingleUser() {

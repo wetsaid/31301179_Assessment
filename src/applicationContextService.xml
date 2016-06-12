@@ -3,12 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 					http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-    <!--<bean id="userService" class="com.sshhw.service.UserService" parent="UserDAO"/>-->
-    <!--<bean id="blogService" class="com.sshhw.service.BlogService" parent="BlogDAO">-->
-        <!--<property name="sqlService" ref="sqlService"/>-->
-    <!--</bean>-->
 
-    <!--分割线-->
     <bean id="teacherService" class="cn.edu.zucc.shijf.service.TeacherService">
         <property name="teacherDAO" ref="teacherDAO"/>
     </bean>
@@ -20,6 +15,10 @@
     </bean>
     <bean id="courseService" class="cn.edu.zucc.shijf.service.CourseService">
         <property name="courseDAO" ref="courseDAO"/>
+        <property name="teacherDAO" ref="teacherDAO"/>
+    </bean>
+    <bean id="chooseCourseService" class="cn.edu.zucc.shijf.service.ChooseCourseService">
+        <property name="chooseCourseDAO" ref="chooseCourseDAO"/>
     </bean>
 
 </beans>

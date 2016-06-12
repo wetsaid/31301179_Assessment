@@ -33,13 +33,10 @@
     <a target="_blank"  href="user!showSingleUser.action?userId=${sessionScope.userId}">预览个人信息</a>
     <a href="user!showEditUser.action">修改资料</a>
     <a href="">修改密码</a>
-
     <hr>
-    我的课程 第${sessionScope.coursesCurrentPage}页/共${coursesTotalPage}页
-    <a href="courseAdd.jsp">添加新课程</a>
 
-    <br>
-    <br>
+    我的课程
+    <a href="courseAdd.jsp">添加新课程</a><br/><br/>
 
     <table border="1">
             <tr>
@@ -54,7 +51,7 @@
 
         <c:forEach items="${courses}" var="course">
             <tr>
-                <td><a href="">${course.courseName}</a></td>
+                <td>${course.courseName}</td>
                 <td>${course.courseCode}</td>
                 <td>${course.courseTime}</td>
                 <td>${course.courseLocation}</td>
@@ -71,11 +68,11 @@
 
     <br>
 
-    分页：
-    <a href="">首页</a>
-    <a href="">上一页</a>
-    <a href="">下一页</a>
-    <a href="">末页</a>
+    第${coursesCurrentPage}页/共${coursesTotalPage}页，共${coursesAllRow}条记录
+    <a href="course!goToPage.action?p=first">首页</a>
+    <a href="course!goToPage.action?p=previous">上一页</a>
+    <a href="course!goToPage.action?p=next">下一页</a>
+    <a href="course!goToPage.action?p=last">末页</a>
 
 </body>
 

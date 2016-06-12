@@ -4,19 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 					http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-
-    <!--<bean id="UserDAO" class="com.sshhw.core.UserDAO">-->
-        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
-    <!--<bean id="BlogDAO" class="com.sshhw.core.BlogDAO">-->
-        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
-
-    <!--分割线-->
-
-    <!--<bean id="baseDAO" class="cn.edu.zucc.shijf.dao.BaseDAO">-->
-        <!--<property name="sessionFactory" ref="sessionFactory"/>-->
-    <!--</bean>-->
     <bean id="teacherDAO" class="cn.edu.zucc.shijf.dao.TeacherDAO">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -27,6 +14,9 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="courseDAO" class="cn.edu.zucc.shijf.dao.CourseDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="chooseCourseDAO" class="cn.edu.zucc.shijf.dao.ChooseCourseDAO">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

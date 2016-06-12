@@ -128,4 +128,9 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
         }
         return str;
     }
+
+    public void logout() {
+        session.clear();
+        forward("index.jsp");
+    }
 }
