@@ -19,6 +19,10 @@ public class CourseService {
         this.courseDAO = courseDAO;
     }
 
+    public Course getCourse(int courseId) {
+        return courseDAO.get(courseId);
+    }
+
     public void addCourse(Course course) {
         courseDAO.add(course);
     }
@@ -28,11 +32,17 @@ public class CourseService {
     }
 
     public void deleteCourse(int courseId) {
-        courseDAO.delete(courseId);
+        //软删除
+        Course course = courseDAO.get(courseId);
+        course.setCourseStatus("D");
+        courseDAO.update(course);
+
+        //非软删除
+        //courseDAO.delete(courseId);
     }
 
     public PageBean loadTeachersCoursesByPage(int teacherId, int pageSize, int page) {
-        String hql = "from Course as c where c.courseStatus = 'A' and c.teacherId = ?";
+        String hql = "from Course as c where c.courseStatus <> 'D' and c.teacherId = ?";
         Object[] params = {teacherId};
         PageBean pageBean = courseDAO.findForPage(hql, params, pageSize, page);
         return pageBean;

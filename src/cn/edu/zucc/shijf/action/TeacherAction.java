@@ -114,10 +114,11 @@ public class TeacherAction extends BaseAction {
     public void showManageCenter() {
         int teacherId = (int) session.get("teacherId");
         PageBean pageBean = courseService.loadTeachersCoursesByPage(teacherId, pageSize, page);
-        this.request.setAttribute("courses", pageBean.getList());
-        this.request.setAttribute("coursesCurrentPage", pageBean.getCurrentPage());
-        this.request.setAttribute("coursesTotalPage", pageBean.getTotalPage());
-        this.request.setAttribute("coursesAllRow", pageBean.getAllRow());
+        request.setAttribute("courses", pageBean.getList());
+        request.setAttribute("coursesTotalPage", pageBean.getTotalPage());
+        request.setAttribute("coursesAllRow", pageBean.getAllRow());
+        session.put("coursesPageSize", pageBean.getPageSize());
+        session.put("coursesCurrentPage", pageBean.getCurrentPage());
         this.forward("manageCenterTeacher.jsp");
     }
 }

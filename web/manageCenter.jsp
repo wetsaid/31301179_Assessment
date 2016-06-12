@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -40,7 +40,7 @@
      
      <hr>
      博文目录 当前页：第 5 页 总页数 10 页
-     <a href="publishBlog.jsp">发表新文章</a>
+	 <a href="courseAdd.jsp">发表新文章</a>
      
      <br>
      <br>

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -13,10 +13,12 @@
     <meta http-equiv="description" content="This is my page">
 
     <script type="text/javascript">
+        var updateObj = function (id) {
+            window.location = "course!goToUpdate.action?courseId=" + id;
+        }
         var deleteObj = function(id)
         {
-            b = confirm("确认要删除此课程吗?");
-            if(b)
+            if (confirm("确认要删除此课程吗?"))
             {
                 window.location="course!deleteCourse.action?courseId=" + id;
             }
@@ -33,8 +35,8 @@
     <a href="">修改密码</a>
 
     <hr>
-    我的课程 第5页/共10页
-    <a href="publishBlog.jsp">添加新课程</a>
+    我的课程 第${sessionScope.coursesCurrentPage}页/共${coursesTotalPage}页
+    <a href="courseAdd.jsp">添加新课程</a>
 
     <br>
     <br>
@@ -45,17 +47,21 @@
                 <td>课程代码</td>
                 <td>上课时间</td>
                 <td>上课地点</td>
+                <td>容量</td>
+                <td>起始结束周</td>
                 <td>操作</td>
             </tr>
 
-        <c:forEach items="${courses}"  var="course">
+        <c:forEach items="${courses}" var="course">
             <tr>
                 <td><a href="">${course.courseName}</a></td>
                 <td>${course.courseCode}</td>
                 <td>${course.courseTime}</td>
                 <td>${course.courseLocation}</td>
+                <td>${course.courseCapacity}</td>
+                <td>${course.startEndWeek}</td>
                 <td>
-                    <a href="">修改</a>
+                    <a onclick="updateObj(${course.courseId});" href="#">修改</a>
                     <a onclick="deleteObj(${course.courseId});" href="#">删除</a>
                 </td>
             </tr>
