@@ -21,7 +21,7 @@
 <a href="loginStudent.jsp">学生</a><br/>
 <form action="systemUser!login.action" method="post">
     管理员账号：<input type="text" name="systemUser.userAccount"/><br/>
-    管理员密码：<input type="text" name="systemUser.userPassword"/><br/>
+    管理员密码：<input type="password" name="systemUser.userPassword"/><br/>
     <input type="submit" value="登录"/><br/>
 </form>
 </body>

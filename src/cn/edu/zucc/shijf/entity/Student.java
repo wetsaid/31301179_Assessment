@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by wetsaid on 6/2/2016.

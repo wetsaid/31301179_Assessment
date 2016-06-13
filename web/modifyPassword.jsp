@@ -4,7 +4,7 @@
 <html>
 <head>
 
-    <title>失败</title>
+    <title>修改密码</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -15,6 +15,13 @@
 </head>
 
 <body>
-操作失败！
+<%@include file="top.jsp" %>
+<form action="systemUser!modifyPassword.action" method="post">
+    原密码：<input type="password" name="oldPassword"/><br/>
+    新密码：<input type="password" name="newPassword1"/><br/>
+    重复新密码：<input type="password" name="newPassword2"/><br/>
+    <input type="submit" value="确认"/>
+    <input type="reset" value="清空"/><br/>
+</form>
 </body>
 </html>

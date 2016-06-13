@@ -70,37 +70,25 @@ public class StudentAction extends BaseAction {
         this.chooseCourseService = chooseCourseService;
     }
 
-    public String addStudent() {
-        System.out.println("-------StudentAction.addStudent--------" + student.getStudentName());
-        studentService.addStudent(student);
-        return "success";
-    }
-
-    public String updateStudent() {
-        System.out.println("-------StudentAction.updateStudent--------" + student.getStudentName());
-        studentService.updateStudent(student);
-        return "success";
-    }
-
-    public String deleteStudent() {
-        System.out.println("-------StudentAction.deleteStudent--------" + student.getStudentName());
-        studentService.deleteStudent(student);
-        return "success";
-    }
-
     public void login() throws IOException {
         List list = studentService.findByProperty(ACCOUNT, student.getStudentAccount());
         if (list == null || list.size() < 1) {
             this.alertRedirect("学生账号不存在", "loginStudent.jsp");
         } else {
             Student oldStudent = (Student) list.get(0);
-            if (student.getStudentPassword().equals(oldStudent.getStudentPassword())) {
+            if (!student.getStudentPassword().equals(oldStudent.getStudentPassword())) {
+                this.alertRedirect("密码错误！", "loginStudent.jsp");
+            } else {
                 session.put("studentId", oldStudent.getStudentId());
                 session.put("studentName", oldStudent.getStudentName());
                 session.put("userType", "student");
+
+                //获取我的课程
+                int studentId = (int) session.get("studentId");
+                List myCourses = chooseCourseService.loadMyCourse(studentId);
+                session.put("myCourses", myCourses);
+                session.put("myCoursesAllRow", myCourses.size());
                 this.response.sendRedirect("index.jsp");
-            } else {
-                this.alertRedirect("密码错误！", "loginStudent.jsp");
             }
         }
     }
@@ -130,12 +118,19 @@ public class StudentAction extends BaseAction {
         session.put("coursesPageSize", pageBean.getPageSize());
         session.put("coursesCurrentPage", pageBean.getCurrentPage());
 
-        //获取我的课程
-        int studentId = (int) session.get("studentId");
-        List myCourses = chooseCourseService.loadMyCourse(studentId);
-        session.put("myCourses", myCourses);
-        session.put("myCoursesAllRow", myCourses.size());
-
         this.forward("manageCenterStudent.jsp");
+    }
+
+    public void showEditStudent() {
+        int studentId = (int) session.get("studentId");
+        Student student = studentService.getStudent(studentId);
+        request.setAttribute("student", student);
+        this.forward("editStudent.jsp");
+    }
+
+    public void updateInformation() {
+        studentService.updateStudent(student);
+        session.put("studentName", student.getStudentName());
+        this.alertRedirect("修改成功！", "manageCenterStudent.jsp");
     }
 }

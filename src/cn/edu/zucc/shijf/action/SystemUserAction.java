@@ -1,7 +1,11 @@
 package cn.edu.zucc.shijf.action;
 
+import cn.edu.zucc.shijf.entity.Student;
 import cn.edu.zucc.shijf.entity.SystemUser;
+import cn.edu.zucc.shijf.entity.Teacher;
+import cn.edu.zucc.shijf.service.StudentService;
 import cn.edu.zucc.shijf.service.SystemUserService;
+import cn.edu.zucc.shijf.service.TeacherService;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,8 +16,37 @@ import java.util.List;
 public class SystemUserAction extends BaseAction {
 
     private static final String ACCOUNT = "userAccount";
+    private String oldPassword;
+    private String newPassword1;
+    private String newPassword2;
     private SystemUser systemUser;
     private SystemUserService systemUserService;
+    private TeacherService teacherService;
+    private StudentService studentService;
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword1() {
+        return newPassword1;
+    }
+
+    public void setNewPassword1(String newPassword1) {
+        this.newPassword1 = newPassword1;
+    }
+
+    public String getNewPassword2() {
+        return newPassword2;
+    }
+
+    public void setNewPassword2(String newPassword2) {
+        this.newPassword2 = newPassword2;
+    }
 
     public SystemUser getSystemUser() {
         return systemUser;
@@ -31,22 +64,20 @@ public class SystemUserAction extends BaseAction {
         this.systemUserService = systemUserService;
     }
 
-    public String addSystemUser() {
-        System.out.println("-------SystemUserAction.addSystemUser--------" + systemUser.getUserName());
-        systemUserService.addSystemUser(systemUser);
-        return "success";
+    public TeacherService getTeacherService() {
+        return teacherService;
     }
 
-    public String updateSystemUser() {
-        System.out.println("-------SystemUserAction.updateSystemUser--------" + systemUser.getUserName());
-        systemUserService.updateSystemUser(systemUser);
-        return "success";
+    public void setTeacherService(TeacherService teacherService) {
+        this.teacherService = teacherService;
     }
 
-    public String deleteSystemUser() {
-        System.out.println("-------SystemUserAction.deleteSystemUser--------" + systemUser.getUserName());
-        systemUserService.deleteSystemUser(systemUser);
-        return "success";
+    public StudentService getStudentService() {
+        return studentService;
+    }
+
+    public void setStudentService(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     public void login() throws IOException {
@@ -80,5 +111,53 @@ public class SystemUserAction extends BaseAction {
 
         systemUserService.addSystemUser(systemUser);
         this.response.sendRedirect("index.jsp");
+    }
+
+    public void modifyPassword() {
+        if (!newPassword1.equals(newPassword2)) {
+            this.alertRedirect("两次密码不同！", "modifyPassword.jsp");
+            return;
+        }
+        String userType = (String) session.get("userType");
+        String result = null;
+        if ("systemUser".equals(userType)) {
+            int userId = (int) session.get("userId");
+            result = systemUserService.modifyPassword(userId, oldPassword, newPassword1);
+        } else if ("teacher".equals(userType)) {
+            int teacherId = (int) session.get("teacherId");
+            result = teacherService.modifyPassword(teacherId, oldPassword, newPassword1);
+        } else if ("student".equals(userType)) {
+            int studentId = (int) session.get("studentId");
+            result = studentService.modifyPassword(studentId, oldPassword, newPassword1);
+        }
+
+        //判断结果
+        if (result != null && !"".equals(result)) {
+            this.alertRedirect(result, "modifyPassword.jsp");
+        } else {
+            this.alertRedirect("你的密码已更新！", "index.jsp");
+        }
+    }
+
+    public void showUserInformation() {
+        String userType = (String) session.get("userType");
+        if ("systemUser".equals(userType)) {
+            int userId = (int) session.get("userId");
+            SystemUser systemUser = systemUserService.getUser(userId);
+            request.setAttribute("systemUser", systemUser);
+            this.forward("informationSystemUser.jsp");
+
+        } else if ("teacher".equals(userType)) {
+            int teacherId = (int) session.get("teacherId");
+            Teacher teacher = teacherService.getTeacher(teacherId);
+            request.setAttribute("teacher", teacher);
+            this.forward("informationTeacher.jsp");
+
+        } else if ("student".equals(userType)) {
+            int studentId = (int) session.get("studentId");
+            Student student = studentService.getStudent(studentId);
+            request.setAttribute("student", student);
+            this.forward("informationStudent.jsp");
+        }
     }
 }

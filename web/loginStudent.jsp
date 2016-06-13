@@ -21,7 +21,7 @@
 <a href="loginStudent.jsp">学生</a>
 <form action="student!login.action" method="post">
     学生账号：<input  type="text" name="student.studentAccount"/><br/>
-    学生密码：<input  type="text" name="student.studentPassword"/><br/>
+    学生密码：<input type="password" name="student.studentPassword"/><br/>
     <input  type="submit" value="登录"/><br/>
 </form>
 </body>

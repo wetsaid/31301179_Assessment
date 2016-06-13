@@ -16,13 +16,14 @@
 
     <c:if test="${sessionScope.userType=='teacher'}">
         欢迎${sessionScope.teacherName}老师回来！
-        <a href="teacher!showManageCenter.action?pageSize=10">管理中心</a>
+        <a href="teacher!showManageCenter.action?pageSize=10">课程管理</a>
         <a href="base!logout.action">注销</a>
     </c:if>
 
     <c:if test="${sessionScope.userType=='student'}">
         欢迎${sessionScope.studentName}同学回来！
-        <a href="student!showManageCenter.action?pageSize=10">管理中心</a>
+        <a href="student!showManageCenter.action?pageSize=10">课程管理</a>
+        <a href="evaluate.jsp">教学评价</a>
         <a href="base!logout.action">注销</a>
     </c:if>
 

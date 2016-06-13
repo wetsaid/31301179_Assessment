@@ -20,22 +20,34 @@ public class TeacherService {
         this.teacherDAO = teacherDAO;
     }
 
+    public Teacher getTeacher(int teacherId) {
+        return teacherDAO.get(teacherId);
+    }
+
     public void addTeacher(Teacher teacher) {
-        System.out.println("------TeacherService.addTeacher--------" + teacher.getTeacherName());
         teacherDAO.add(teacher);
     }
 
     public void updateTeacher(Teacher teacher) {
-        System.out.println("------TeacherService.updateTeacher--------" + teacher.getTeacherName());
         teacherDAO.update(teacher);
     }
 
-    public void deleteTeacher(Teacher teacher) {
-        System.out.println("------TeacherService.deleteTeacher--------" + teacher.getTeacherName());
-        teacherDAO.delete(teacher.getTeacherId());
+    public void deleteTeacher(int teacherId) {
+        teacherDAO.delete(teacherId);
     }
 
     public List findByProperty(String propertyName, Object value) {
         return teacherDAO.findByProperty(propertyName, value);
+    }
+
+    public String modifyPassword(int teacherId, String oldPassword, String newPassword) {
+        Teacher teacher = teacherDAO.get(teacherId);
+        if (!oldPassword.equals(teacher.getTeacherPassword())) {
+            return "原密码错误！";
+        } else {
+            teacher.setTeacherPassword(newPassword);
+            teacherDAO.update(teacher);
+            return null;
+        }
     }
 }

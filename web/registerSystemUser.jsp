@@ -22,7 +22,7 @@
 <a href="registerStudent.jsp">学生</a>
 <form action="systemUser!register.action" method="post">
     管理员账号：<input type="text" name="systemUser.userAccount"/><br/>
-    管理员密码：<input type="text" name="systemUser.userPassword"/><br/>
+    管理员密码：<input type="password" name="systemUser.userPassword"/><br/>
     管理员姓名：<input type="text" name="systemUser.userName"/><br/>
     <input type="submit" value="注册"/><br/>
 </form>

@@ -5,9 +5,8 @@
     <!-- 将action托管给spring -->
     <constant name="struts.objectFactory" value="spring"/>
     <package name="struts" extends="struts-default">
-        <action name="user" class="userAction"/>
+
         <action name="index" class="indexAction"/>
-        <action name="blog" class="blogAction"/>
 
         <!--分割线-->
         <action name="base" class="baseAction"/>

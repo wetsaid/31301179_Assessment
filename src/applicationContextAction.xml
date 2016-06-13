@@ -17,6 +17,8 @@
     </bean>
     <bean id="systemUserAction" class="cn.edu.zucc.shijf.action.SystemUserAction" parent="baseAction">
         <property name="systemUserService" ref="systemUserService"/>
+        <property name="teacherService" ref="teacherService"/>
+        <property name="studentService" ref="studentService"/>
     </bean>
     <bean id="courseAction" class="cn.edu.zucc.shijf.action.CourseAction" parent="baseAction">
         <property name="courseService" ref="courseService"/>

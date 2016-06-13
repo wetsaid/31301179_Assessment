@@ -20,7 +20,7 @@
         {
             if (confirm("确认要删除此课程吗?"))
             {
-                window.location="course!deleteCourse.action?courseId=" + id;
+                window.location = "course!deleteCourse.action?courseId=" + id;
             }
         }
     </script>
@@ -30,9 +30,9 @@
 <body>
 
     <%@include file="top.jsp" %>
-    <a target="_blank"  href="user!showSingleUser.action?userId=${sessionScope.userId}">预览个人信息</a>
-    <a href="user!showEditUser.action">修改资料</a>
-    <a href="">修改密码</a>
+    <a target="_blank" href="systemUser!showUserInformation.action">预览个人信息</a>
+    <a href="teacher!showEditTeacher.action">修改资料</a>
+    <a href="modifyPassword.jsp">修改密码</a>
     <hr>
 
     我的课程

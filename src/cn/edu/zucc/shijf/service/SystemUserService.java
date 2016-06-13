@@ -20,22 +20,34 @@ public class SystemUserService {
         this.systemUserDAO = systemUserDAO;
     }
 
+    public SystemUser getUser(int userId) {
+        return systemUserDAO.get(userId);
+    }
+
     public void addSystemUser(SystemUser systemUser) {
-        System.out.println("------SystemUserService.addSystemUser--------" + systemUser.getUserName());
         systemUserDAO.add(systemUser);
     }
 
     public void updateSystemUser(SystemUser systemUser) {
-        System.out.println("------SystemUserService.updateSystemUser--------" + systemUser.getUserName());
         systemUserDAO.update(systemUser);
     }
 
-    public void deleteSystemUser(SystemUser systemUser) {
-        System.out.println("------SystemUserService.deleteSystemUser--------" + systemUser.getUserName());
-        systemUserDAO.delete(systemUser.getUserId());
+    public void deleteSystemUser(int systemUserId) {
+        systemUserDAO.delete(systemUserId);
     }
 
     public List findByProperty(String propertyName, Object value) {
         return systemUserDAO.findByProperty(propertyName, value);
+    }
+
+    public String modifyPassword(int userId, String oldPassword, String newPassword) {
+        SystemUser user = systemUserDAO.get(userId);
+        if (oldPassword.equals(user.getUserPassword())) {
+            user.setUserPassword(newPassword);
+            systemUserDAO.update(user);
+            return null;
+        } else {
+            return "原密码错误！";
+        }
     }
 }

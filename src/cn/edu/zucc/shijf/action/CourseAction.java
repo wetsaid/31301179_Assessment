@@ -81,7 +81,7 @@ public class CourseAction extends BaseAction {
         int pageSize = (int) session.get("coursesPageSize");
         int page = (int) session.get("coursesCurrentPage");
         PageBean pageBean = courseService.loadTeachersCoursesByPage(teacherId, pageSize, page);
-        request.setAttribute("courses", pageBean.getList());
+        session.put("courses", pageBean.getList());
         session.put("coursesTotalPage", pageBean.getTotalPage());
         session.put("coursesAllRow", pageBean.getAllRow());
         this.forward("manageCenterTeacher.jsp");
@@ -153,12 +153,12 @@ public class CourseAction extends BaseAction {
         if ("teacher".equals(session.get("userType"))) {
             int teacherId = (int) session.get("teacherId");
             pageBean = courseService.loadTeachersCoursesByPage(teacherId, pageSize, page);
-            request.setAttribute("courses", pageBean.getList());
+            session.put("courses", pageBean.getList());
             session.put("coursesCurrentPage", pageBean.getCurrentPage());
             this.forward("manageCenterTeacher.jsp");
         } else if ("student".equals(session.get("userType"))) {
             pageBean = courseService.loadAllCourseByPage(pageSize, page);
-            request.setAttribute("courses", pageBean.getList());
+            session.put("courses", pageBean.getList());
             session.put("coursesCurrentPage", pageBean.getCurrentPage());
             this.forward("manageCenterStudent.jsp");
         }

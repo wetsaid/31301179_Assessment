@@ -22,7 +22,7 @@
 <a href="registerStudent.jsp">学生</a>
 <form action="teacher!register.action" method="post">
     教师账号：<input type="text" name="teacher.teacherAccount"/><br/>
-    教师密码：<input type="text" name="teacher.teacherPassword"/><br/>
+    教师密码：<input type="password" name="teacher.teacherPassword"/><br/>
     教师昵称：<input type="text" name="teacher.teacherName"/><br/>
     <input type="submit" value="注册"/><br/>
 </form>

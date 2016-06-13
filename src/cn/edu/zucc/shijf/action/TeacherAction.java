@@ -60,24 +60,6 @@ public class TeacherAction extends BaseAction {
         this.courseService = courseService;
     }
 
-    public String addTeacher() {
-        System.out.println("-------TeacherAction.addTeacher--------" + teacher.getTeacherName());
-        teacherService.addTeacher(teacher);
-        return "success";
-    }
-
-    public String updateTeacher() {
-        System.out.println("-------TeacherAction.updateTeacher--------" + teacher.getTeacherName());
-        teacherService.updateTeacher(teacher);
-        return "success";
-    }
-
-    public String deleteTeacher() {
-        System.out.println("-------TeacherAction.deleteTeacher--------" + teacher.getTeacherName());
-        teacherService.deleteTeacher(teacher);
-        return "success";
-    }
-
     public void login() throws IOException {
         List list = teacherService.findByProperty(ACCOUNT, teacher.getTeacherAccount());
         if (list == null || list.size() < 1) {
@@ -114,11 +96,24 @@ public class TeacherAction extends BaseAction {
     public void showManageCenter() {
         int teacherId = (int) session.get("teacherId");
         PageBean pageBean = courseService.loadTeachersCoursesByPage(teacherId, pageSize, page);
-        request.setAttribute("courses", pageBean.getList());
+        session.put("courses", pageBean.getList());
         session.put("coursesTotalPage", pageBean.getTotalPage());
         session.put("coursesAllRow", pageBean.getAllRow());
         session.put("coursesPageSize", pageBean.getPageSize());
         session.put("coursesCurrentPage", pageBean.getCurrentPage());
         this.forward("manageCenterTeacher.jsp");
+    }
+
+    public void showEditTeacher() {
+        int teacherId = (int) session.get("teacherId");
+        Teacher teacher = teacherService.getTeacher(teacherId);
+        request.setAttribute("teacher", teacher);
+        this.forward("editTeacher.jsp");
+    }
+
+    public void updateInformation() {
+        teacherService.updateTeacher(teacher);
+        session.put("teacherName", teacher.getTeacherName());
+        this.alertRedirect("修改成功！", "manageCenterTeacher.jsp");
     }
 }

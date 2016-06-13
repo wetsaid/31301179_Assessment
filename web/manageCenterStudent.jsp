@@ -25,9 +25,9 @@
 <body>
 
 <%@include file="top.jsp" %>
-<a target="_blank" href="user!showSingleUser.action?userId=${sessionScope.userId}">预览个人信息</a>
-<a href="user!showEditUser.action">修改资料</a>
-<a href="">修改密码</a>
+<a target="_blank" href="systemUser!showUserInformation.action">预览个人信息</a>
+<a href="student!showEditStudent.action">修改资料</a>
+<a href="modifyPassword.jsp">修改密码</a>
 <hr>
 
 <form action="chooseCourse!addChooseCourse.action" method="post">
@@ -87,7 +87,7 @@
 
         <c:forEach items="${myCourses}" var="course">
             <tr>
-                <td><a href="">${course.courseName}</a></td>
+                <td>${course.courseName}</td>
                 <td>${course.courseCode}</td>
                 <td>${course.teacherName}</td>
                 <td>${course.courseTime}</td>
