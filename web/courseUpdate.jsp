@@ -42,7 +42,7 @@
     课程名称：<input type="text" value="${course.courseName}" name="course.courseName"/><br/>
     课程时间：<input type="text" value="${course.courseTime}" name="course.courseTime"/><br/>
     课程地点：<input type="text" value="${course.courseLocation}" name="course.courseLocation"/><br/>
-    容量：<input type="text" readonly value="${course.courseCapacity}" name="course.courseCapacity"/><br/>
+    容量：<input type="text" value="${course.courseCapacity}" name="course.courseCapacity"/><br/>
     起始结束周：<input type="text" readonly value="${start}" name="startWeek"/>
     -<input type="text" readonly value="${end}" name="endWeek"/><br/>
     <input type="submit" value="修改"/><br/>

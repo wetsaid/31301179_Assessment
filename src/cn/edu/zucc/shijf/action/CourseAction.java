@@ -1,19 +1,14 @@
 package cn.edu.zucc.shijf.action;
 
-import cn.edu.zucc.shijf.entity.ChooseCourse;
 import cn.edu.zucc.shijf.entity.Course;
 import cn.edu.zucc.shijf.page.PageBean;
-import cn.edu.zucc.shijf.service.ChooseCourseService;
 import cn.edu.zucc.shijf.service.CourseService;
-
-import java.util.List;
 
 /**
  * Created by wetsaid on 6/11/2016.
  */
 public class CourseAction extends BaseAction {
 
-    private List<String> ids;
     private String p;
     private String code;
     private int startWeek;
@@ -21,15 +16,6 @@ public class CourseAction extends BaseAction {
     private int courseId;
     private Course course;
     private CourseService courseService;
-    private ChooseCourseService chooseCourseService;
-
-    public List<String> getIds() {
-        return ids;
-    }
-
-    public void setIds(List<String> ids) {
-        this.ids = ids;
-    }
 
     public String getP() {
         return p;
@@ -87,18 +73,10 @@ public class CourseAction extends BaseAction {
         this.courseService = courseService;
     }
 
-    public ChooseCourseService getChooseCourseService() {
-        return chooseCourseService;
-    }
-
-    public void setChooseCourseService(ChooseCourseService chooseCourseService) {
-        this.chooseCourseService = chooseCourseService;
-    }
-
     /**
      * 更新列表
      */
-    public void updateList() {
+    private void updateList() {
         int teacherId = (int) session.get("teacherId");
         int pageSize = (int) session.get("coursesPageSize");
         int page = (int) session.get("coursesCurrentPage");
@@ -114,7 +92,7 @@ public class CourseAction extends BaseAction {
         courseService.addCourse(course);
 
         //刷新列表
-        updateList();
+        this.updateList();
     }
 
     /**
@@ -137,14 +115,14 @@ public class CourseAction extends BaseAction {
         courseService.updateCourse(course);
 
         //刷新列表
-        updateList();
+        this.updateList();
     }
 
     public void deleteCourse() {
         courseService.deleteCourse(courseId);
 
         //刷新列表
-        updateList();
+        this.updateList();
     }
 
     /**
@@ -152,7 +130,6 @@ public class CourseAction extends BaseAction {
      * 首页/上一页/下一页/末页
      */
     public void goToPage() {
-        int teacherId = (int) session.get("teacherId");
         int pageSize = (int) session.get("coursesPageSize");
         int page = (int) session.get("coursesCurrentPage");
         int totalPage = (int) session.get("coursesTotalPage");
@@ -170,21 +147,21 @@ public class CourseAction extends BaseAction {
                 page = totalPage;
                 break;
         }
-        PageBean pageBean = courseService.loadTeachersCoursesByPage(teacherId, pageSize, page);
-        request.setAttribute("courses", pageBean.getList());
-        session.put("coursesCurrentPage", pageBean.getCurrentPage());
-        this.forward("manageCenterTeacher.jsp");
-    }
 
-    public void chooseCourses() {
-        for (String str : ids) {
-            ChooseCourse chooseCourse = new ChooseCourse();
-            chooseCourse.setStudentId((Integer) session.get("studentId"));
-            chooseCourse.setCourseId(Integer.parseInt(str));
-            chooseCourse.setChooseCourseStatus("A");
-//            chooseCourse.setCourseSemester("2015-2");
-            chooseCourseService.addChooseCourse(chooseCourse);
+        //学生和老师讲进行不同的操作，并跳转不同的页面
+        PageBean pageBean = null;
+        if ("teacher".equals(session.get("userType"))) {
+            int teacherId = (int) session.get("teacherId");
+            pageBean = courseService.loadTeachersCoursesByPage(teacherId, pageSize, page);
+            request.setAttribute("courses", pageBean.getList());
+            session.put("coursesCurrentPage", pageBean.getCurrentPage());
+            this.forward("manageCenterTeacher.jsp");
+        } else if ("student".equals(session.get("userType"))) {
+            pageBean = courseService.loadAllCourseByPage(pageSize, page);
+            request.setAttribute("courses", pageBean.getList());
+            session.put("coursesCurrentPage", pageBean.getCurrentPage());
+            this.forward("manageCenterStudent.jsp");
         }
-        this.forward("manageCenterStudent.jsp");
+
     }
 }

@@ -1,6 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -14,12 +13,9 @@
     <meta http-equiv="description" content="This is my page">
 
     <script type="text/javascript">
-        var updateObj = function (id) {
-            window.location = "course!goToUpdate.action?courseId=" + id;
-        }
         var deleteObj = function (id) {
-            if (confirm("确认要删除此课程吗?")) {
-                window.location = "course!deleteCourse.action?courseId=" + id;
+            if (confirm("确认要退选此课程吗?")) {
+                window.location = "chooseCourse!deleteChooseCourse.action?courseId=" + id;
             }
         }
     </script>
@@ -34,7 +30,7 @@
 <a href="">修改密码</a>
 <hr>
 
-<form action="course!chooseCourses.action">
+<form action="chooseCourse!addChooseCourse.action" method="post">
     <fieldset>
         <legend style="text-align: center">可选课程</legend>
 
@@ -71,7 +67,7 @@
         <a href="course!goToPage.action?p=next">下一页</a>
         <a href="course!goToPage.action?p=last">末页</a>
     </fieldset>
-    <input type="submit" value="提交" class="button">
+    <input type="submit" value="提交">
 </form>
 
 <fieldset>
@@ -107,5 +103,4 @@
 </fieldset>
 
 </body>
-
 </html>

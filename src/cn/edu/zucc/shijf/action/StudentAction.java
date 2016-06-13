@@ -2,6 +2,7 @@ package cn.edu.zucc.shijf.action;
 
 import cn.edu.zucc.shijf.entity.Student;
 import cn.edu.zucc.shijf.page.PageBean;
+import cn.edu.zucc.shijf.service.ChooseCourseService;
 import cn.edu.zucc.shijf.service.CourseService;
 import cn.edu.zucc.shijf.service.StudentService;
 
@@ -19,6 +20,7 @@ public class StudentAction extends BaseAction {
     private Student student;
     private StudentService studentService;
     private CourseService courseService;
+    private ChooseCourseService chooseCourseService;
 
     public int getPageSize() {
         return pageSize;
@@ -58,6 +60,14 @@ public class StudentAction extends BaseAction {
 
     public void setCourseService(CourseService courseService) {
         this.courseService = courseService;
+    }
+
+    public ChooseCourseService getChooseCourseService() {
+        return chooseCourseService;
+    }
+
+    public void setChooseCourseService(ChooseCourseService chooseCourseService) {
+        this.chooseCourseService = chooseCourseService;
     }
 
     public String addStudent() {
@@ -112,12 +122,20 @@ public class StudentAction extends BaseAction {
     }
 
     public void showManageCenter() {
+        //获取全部可选课程
         PageBean pageBean = courseService.loadAllCourseByPage(pageSize, page);
         session.put("courses", pageBean.getList());
         session.put("coursesTotalPage", pageBean.getTotalPage());
         session.put("coursesAllRow", pageBean.getAllRow());
         session.put("coursesPageSize", pageBean.getPageSize());
         session.put("coursesCurrentPage", pageBean.getCurrentPage());
+
+        //获取我的课程
+        int studentId = (int) session.get("studentId");
+        List myCourses = chooseCourseService.loadMyCourse(studentId);
+        session.put("myCourses", myCourses);
+        session.put("myCoursesAllRow", myCourses.size());
+
         this.forward("manageCenterStudent.jsp");
     }
 }

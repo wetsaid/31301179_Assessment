@@ -11,9 +11,10 @@ import javax.persistence.*;
 @Table(name = "course")
 public class Course {
 
+    private String teacherName;
+
     private int courseId;
     private int teacherId;
-    private String teacherName;
     private int courseTypeId;
     private String courseName;
     private String courseCode;
@@ -24,6 +25,15 @@ public class Course {
     private String courseStatus;
 
     public Course() {
+    }
+
+    @Transient
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     @Id
@@ -43,15 +53,6 @@ public class Course {
 
     public void setTeacherId(int teacherId) {
         this.teacherId = teacherId;
-    }
-
-    @Transient
-    public String getTeacherName() {
-        return teacherName;
-    }
-
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
     }
 
     public int getCourseTypeId() {

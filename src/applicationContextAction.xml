@@ -6,19 +6,22 @@
 
     <bean id="indexAction" class="cn.edu.zucc.shijf.action.IndexAction" parent="baseAction"/>
 
-    <bean id="teacherAction" class="cn.edu.zucc.shijf.action.TeacherAction">
+    <bean id="teacherAction" class="cn.edu.zucc.shijf.action.TeacherAction" parent="baseAction">
         <property name="teacherService" ref="teacherService"/>
         <property name="courseService" ref="courseService"/>
     </bean>
-    <bean id="studentAction" class="cn.edu.zucc.shijf.action.StudentAction">
+    <bean id="studentAction" class="cn.edu.zucc.shijf.action.StudentAction" parent="baseAction">
         <property name="studentService" ref="studentService"/>
         <property name="courseService" ref="courseService"/>
+        <property name="chooseCourseService" ref="chooseCourseService"/>
     </bean>
-    <bean id="systemUserAction" class="cn.edu.zucc.shijf.action.SystemUserAction">
+    <bean id="systemUserAction" class="cn.edu.zucc.shijf.action.SystemUserAction" parent="baseAction">
         <property name="systemUserService" ref="systemUserService"/>
     </bean>
-    <bean id="courseAction" class="cn.edu.zucc.shijf.action.CourseAction">
+    <bean id="courseAction" class="cn.edu.zucc.shijf.action.CourseAction" parent="baseAction">
         <property name="courseService" ref="courseService"/>
+    </bean>
+    <bean id="chooseCourseAction" class="cn.edu.zucc.shijf.action.ChooseCourseAction" parent="baseAction">
         <property name="chooseCourseService" ref="chooseCourseService"/>
     </bean>
 

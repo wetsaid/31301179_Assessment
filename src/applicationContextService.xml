@@ -19,6 +19,8 @@
     </bean>
     <bean id="chooseCourseService" class="cn.edu.zucc.shijf.service.ChooseCourseService">
         <property name="chooseCourseDAO" ref="chooseCourseDAO"/>
+        <property name="courseDAO" ref="courseDAO"/>
+        <property name="teacherDAO" ref="teacherDAO"/>
     </bean>
 
 </beans>
