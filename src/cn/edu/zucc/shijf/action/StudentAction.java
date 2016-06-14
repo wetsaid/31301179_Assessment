@@ -71,42 +71,43 @@ public class StudentAction extends BaseAction {
     }
 
     public void login() throws IOException {
-        List list = studentService.findByProperty(ACCOUNT, student.getStudentAccount());
+        String account = (String) session.get("account");
+        String password = (String) session.get("password");
+        session.clear();
+        List list = studentService.findByProperty(ACCOUNT, account);
         if (list == null || list.size() < 1) {
-            this.alertRedirect("学生账号不存在", "loginStudent.jsp");
+            this.alertRedirect("学生账号不存在", "login.jsp");
         } else {
             Student oldStudent = (Student) list.get(0);
-            if (!student.getStudentPassword().equals(oldStudent.getStudentPassword())) {
-                this.alertRedirect("密码错误！", "loginStudent.jsp");
+            if (!password.equals(oldStudent.getStudentPassword())) {
+                this.alertRedirect("密码错误！", "login.jsp");
             } else {
                 session.put("studentId", oldStudent.getStudentId());
                 session.put("studentName", oldStudent.getStudentName());
                 session.put("userType", "student");
 
-                //获取我的课程
-                int studentId = (int) session.get("studentId");
-                List myCourses = chooseCourseService.loadMyCourse(studentId);
-                session.put("myCourses", myCourses);
-                session.put("myCoursesAllRow", myCourses.size());
+                this.getStudentInformation();
                 this.response.sendRedirect("index.jsp");
             }
         }
     }
 
     public void register() throws IOException {
-        if ("".equals(student.getStudentAccount()) || student.getStudentAccount() == null) {
-            this.alertRedirect("学生帐号不得为空！", "registerStudent.jsp");
-            return;
-        }
-
-        List list = studentService.findByProperty(ACCOUNT, student.getStudentAccount());
+        String account = (String) session.get("account");
+        String password = (String) session.get("password");
+        String name = (String) session.get("name");
+        session.clear();
+        List list = studentService.findByProperty(ACCOUNT, account);
         if (list.size() >= 1) {
-            this.alertRedirect("学生账号已存在！", "registerStudent.jsp");
+            this.alertRedirect("学生账号已存在！", "register.jsp");
             return;
         }
-
+        student = new Student();
+        student.setStudentAccount(account);
+        student.setStudentPassword(password);
+        student.setStudentName(name);
         studentService.addStudent(student);
-        this.response.sendRedirect("index.jsp");
+        this.alertRedirect("注册成功！", "register.jsp");
     }
 
     public void showManageCenter() {
@@ -121,11 +122,15 @@ public class StudentAction extends BaseAction {
         this.forward("manageCenterStudent.jsp");
     }
 
-    public void showEditStudent() {
+    private void getStudentInformation() {
         int studentId = (int) session.get("studentId");
         Student student = studentService.getStudent(studentId);
-        request.setAttribute("student", student);
-        this.forward("editStudent.jsp");
+        session.put("student", student);
+
+        //我的课程
+        List myCourses = chooseCourseService.loadMyCourse(studentId);
+        session.put("myCourses", myCourses);
+        session.put("myCoursesAllRow", myCourses.size());
     }
 
     public void updateInformation() {

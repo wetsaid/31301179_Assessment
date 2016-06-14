@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
-<!DOCTYPE HTML<%-- PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"--%>>
+<!DOCTYPE HTML>
 <html>
 <head>
     <title>选课系统</title>
@@ -122,59 +122,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- /.navbar-static-side -->
     </nav>
     <div id="page-wrapper">
-        <div class="col-md-12 graphs">
-            <div class="xs">
-
-                <h3>我的课程</h3>
-                <div class="bs-example4" data-example-id="contextual-table">
-                    <table class="table">
-                        <thead style="background-color: lightcyan">
-                        <tr>
-                            <th>#</th>
-                            <td>课程名称</td>
-                            <td>课程代码</td>
-                            <td>上课时间</td>
-                            <td>上课地点</td>
-                            <td>容量</td>
-                            <td>起始结束周</td>
-                            <td>操作</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% int i = 0; %>
-                        <c:forEach items="${courses}" var="course">
-                            <% i += 1; %>
-                            <tr class="<%=(i%2==0)?"active":""%>">
-                                <th scope="row"><%=i%>
-                                </th>
-                                <td>${course.courseName}</td>
-                                <td>${course.courseCode}</td>
-                                <td>${course.courseTime}</td>
-                                <td>${course.courseLocation}</td>
-                                <td>${course.courseCapacity}</td>
-                                <td>${course.startEndWeek}</td>
-                                <td>
-                                    <a onclick="updateObj(${course.courseId});" href="#" class="btn btn-sm btn-default">修改</a>
-                                    <a onclick="deleteObj(${course.courseId});" href="#" class="btn btn-sm btn-danger">删除</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
-
-                <ul class="pagination pagination-lg">
-                    <%--<li>第${coursesCurrentPage}页/共${coursesTotalPage}页，共${coursesAllRow}条记录</li>--%>
-                    <li><a href="course!goToPage.action?p=first" aria-label="Previous"><span aria-hidden="true">«</span></a>
-                    </li>
-                    <li><a href="course!goToPage.action?p=previous"><i class="fa fa-angle-left"></i></a></li>
-                    <li><a href="course!goToPage.action?p=next"><i class="fa fa-angle-right"></i></a></li>
-                    <li><a href="course!goToPage.action?p=last" aria-label="Next"><span aria-hidden="true">»</span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
     </div>
     <!-- /#page-wrapper -->
 </div>

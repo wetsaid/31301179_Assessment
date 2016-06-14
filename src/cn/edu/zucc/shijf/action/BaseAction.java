@@ -93,6 +93,25 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
     }
 
     /**
+     * 弹框并返回原网页
+     * @param msg
+     */
+    public void alertBack(String msg) {
+        try {
+            this.response.setContentType("text/html;charset=utf8");
+            PrintWriter out = this.response.getWriter();
+            out.print("<script>");
+            out.print("alert('" + msg + "');");
+            out.print("window.history.back(-1);");
+            out.print("</script>");
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 转换get方式提交的中文编码（UTF-8）
      *
      * @param str
@@ -112,6 +131,6 @@ public class BaseAction extends ActionSupport implements ServletRequestAware,
 
     public void logout() {
         session.clear();
-        forward("index.jsp");
+        forward("login.jsp");
     }
 }

@@ -61,36 +61,43 @@ public class TeacherAction extends BaseAction {
     }
 
     public void login() throws IOException {
-        List list = teacherService.findByProperty(ACCOUNT, teacher.getTeacherAccount());
+        String account = (String) session.get("account");
+        String password = (String) session.get("password");
+        session.clear();
+        List list = teacherService.findByProperty(ACCOUNT, account);
         if (list == null || list.size() < 1) {
-            this.alertRedirect("教师账号不存在", "loginTeacher.jsp");
+            this.alertRedirect("教师账号不存在", "login.jsp");
         } else {
             Teacher oldTeacher = (Teacher) list.get(0);
-            if (teacher.getTeacherPassword().equals(oldTeacher.getTeacherPassword())) {
+            if (!password.equals(oldTeacher.getTeacherPassword())) {
+                this.alertRedirect("密码错误！", "login.jsp");
+            } else {
                 session.put("teacherId", oldTeacher.getTeacherId());
                 session.put("teacherName", oldTeacher.getTeacherName());
                 session.put("userType", "teacher");
+
+                this.getTeacherInformation();
                 this.response.sendRedirect("index.jsp");
-            } else {
-                this.alertRedirect("密码错误！", "loginTeacher.jsp");
             }
         }
     }
 
     public void register() throws IOException {
-        if ("".equals(teacher.getTeacherAccount()) || teacher.getTeacherAccount() == null) {
-            this.alertRedirect("教师帐号不得为空！", "registerTeacher.jsp");
-            return;
-        }
-
-        List list = teacherService.findByProperty(ACCOUNT, teacher.getTeacherAccount());
+        String account = (String) session.get("account");
+        String password = (String) session.get("password");
+        String name = (String) session.get("name");
+        session.clear();
+        List list = teacherService.findByProperty(ACCOUNT, account);
         if (list.size() >= 1) {
-            this.alertRedirect("教师账号已存在！", "registerTeacher.jsp");
+            this.alertRedirect("教师账号已存在！", "register.jsp");
             return;
         }
-
+        teacher = new Teacher();
+        teacher.setTeacherAccount(account);
+        teacher.setTeacherPassword(password);
+        teacher.setTeacherName(name);
         teacherService.addTeacher(teacher);
-        this.response.sendRedirect("index.jsp");
+        this.alertRedirect("注册成功！", "register.jsp");
     }
 
     public void showManageCenter() {
@@ -104,16 +111,18 @@ public class TeacherAction extends BaseAction {
         this.forward("manageCenterTeacher.jsp");
     }
 
-    public void showEditTeacher() {
+    private void getTeacherInformation() {
         int teacherId = (int) session.get("teacherId");
         Teacher teacher = teacherService.getTeacher(teacherId);
-        request.setAttribute("teacher", teacher);
-        this.forward("editTeacher.jsp");
+        session.put("teacher", teacher);
     }
 
     public void updateInformation() {
         teacherService.updateTeacher(teacher);
         session.put("teacherName", teacher.getTeacherName());
-        this.alertRedirect("修改成功！", "manageCenterTeacher.jsp");
+        System.out.println("TeacherAction.updateInformation");
+        System.out.println(request.getRequestURL());
+        System.out.println(request.getRequestURI());
+        this.alertBack("修改成功！");
     }
 }

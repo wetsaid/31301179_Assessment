@@ -4,8 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 					http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="indexAction" class="cn.edu.zucc.shijf.action.IndexAction" parent="baseAction"/>
-
     <bean id="teacherAction" class="cn.edu.zucc.shijf.action.TeacherAction" parent="baseAction">
         <property name="teacherService" ref="teacherService"/>
         <property name="courseService" ref="courseService"/>

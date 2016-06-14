@@ -43,8 +43,6 @@
         </property>
         <property name="annotatedClasses">
             <list>
-                <value>com.sshhw.core.User</value>
-                <value>com.sshhw.core.Blog</value>
                 <value>cn.edu.zucc.shijf.entity.Branch</value>
                 <value>cn.edu.zucc.shijf.entity.ChooseCourse</value>
                 <value>cn.edu.zucc.shijf.entity.Coding</value>
@@ -86,11 +84,6 @@
         <aop:pointcut id="allServiceMethod" expression="execution(* cn.edu.zucc.shijf.service.*.*(..))"/>
         <aop:advisor pointcut-ref="allServiceMethod" advice-ref="txAdvice"/>
     </aop:config>
-
-    <!-- Sql服务类，弥补hibernate连接查询低效率的不足，依旧是有hibernate管理session -->
-    <bean id="sqlService" class="cn.edu.zucc.shijf.service.SqlService">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
 
     <bean id="baseAction" class="cn.edu.zucc.shijf.action.BaseAction"/>
 

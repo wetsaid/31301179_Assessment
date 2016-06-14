@@ -46,7 +46,6 @@ public class ChooseCourseAction extends BaseAction {
         List myCourses = chooseCourseService.loadMyCourse(studentId);
         session.put("myCourses", myCourses);
         session.put("myCoursesAllRow", myCourses.size());
-        this.forward("manageCenterStudent.jsp");
     }
 
     public void addChooseCourse() {
@@ -59,11 +58,13 @@ public class ChooseCourseAction extends BaseAction {
             chooseCourseService.addChooseCourse(chooseCourse);
         }
         this.updateMyCourses();
+        this.alertRedirect("选课成功！", "manageCenterStudent.jsp");
     }
     
     public void deleteChooseCourse() {
         int studentId = (int) session.get("studentId");
         chooseCourseService.deleteChooseCourse(studentId, courseId);
         this.updateMyCourses();
+        this.forward("myCourses.jsp");
     }
 }
