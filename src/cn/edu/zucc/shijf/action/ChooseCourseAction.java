@@ -60,11 +60,11 @@ public class ChooseCourseAction extends BaseAction {
         this.updateMyCourses();
         this.alertRedirect("选课成功！", "manageCenterStudent.jsp");
     }
-    
+
     public void deleteChooseCourse() {
         int studentId = (int) session.get("studentId");
         chooseCourseService.deleteChooseCourse(studentId, courseId);
         this.updateMyCourses();
-        this.forward("myCourses.jsp");
+//        this.forward("myCourses.jsp");
     }
 }

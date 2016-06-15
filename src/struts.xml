@@ -6,9 +6,6 @@
     <constant name="struts.objectFactory" value="spring"/>
     <package name="struts" extends="struts-default">
 
-        <action name="index" class="indexAction"/>
-
-        <!--分割线-->
         <action name="base" class="baseAction"/>
         <action name="teacher" class="teacherAction"/>
         <action name="student" class="studentAction"/>

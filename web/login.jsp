@@ -28,7 +28,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body id="login">
 
 <div class="login-logo">
-    <h1 style="color: #2d2d2d">教学质量评估系统</h1>
+    <h1 style="color: #2d2d2d">选课系统</h1>
 </div>
 <h2 class="form-heading">登录</h2>
 <div class="app-cam">
